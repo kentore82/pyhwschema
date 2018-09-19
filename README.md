@@ -28,6 +28,24 @@ Out[3]:
  u'timestamp': 1537358228278,
  u'version': 1}
 ```
+### Get latest version of schema with name test as string
+```
+In [8]: pyhwschema.SchemaLatest(conn,"test").get_string()
+Out[8]: u'{"type":"record","namespace":"Testing","name":"Employee","fields":
+[{"name":"Name","type":"string"},{"name":"Age","type":"int"}]}'
+```
+
+### Get latest version of schema with name test as dict
+```
+In [9]: pyhwschema.SchemaLatest(conn,"test").get_dict()
+Out[9]: 
+{u'fields': [{u'name': u'Name', u'type': u'string'},
+  {u'name': u'Age', u'type': u'int'}],
+ u'name': u'Employee',
+ u'namespace': u'Testing',
+ u'type': u'record'}
+
+```
 
 ### Get a schema by using schema id
 ```
