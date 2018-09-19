@@ -1,6 +1,7 @@
 from __future__ import print_function
 import requests
 from avro.schema import parse
+import json
 
 
 class HwSchema(object):
@@ -22,6 +23,32 @@ class HwSchema(object):
         response = requests.get(self.api_url())
 
         return response.json()
+
+    def get_string(self):
+        """Returns a string representation of the schema.
+
+        Gives back a schema string
+
+        Returns:
+            str: from GET request
+        """
+
+        response = requests.get(self.api_url())
+
+        return response.json()[u'schemaText']
+
+    def get_dict(self):
+        """Returns a dict representation of the schema.
+
+        Gives back a schema dict
+
+        Returns:
+            dict: from GET request
+        """
+
+        response = requests.get(self.api_url())
+
+        return json.loads(response.json()[u'schemaText'])
 
     def put(self, payload):
         """Returns a dict with POST response information.
@@ -77,6 +104,12 @@ class SchemaNewMeta(HwSchema):
     def get(self):
         raise AttributeError("'SchemaNewMeta' object has no attribute 'get'")
 
+    def get_string(self):
+        raise AttributeError("'SchemaNewMeta' object has no attribute 'get_string'")
+
+    def get_dict(self):
+        raise AttributeError("'SchemaNewMeta' object has no attribute 'get_dict'")
+
     def create(self):
         payload = {"type": "avro",
                    "schemaGroup": self.schema_group,
@@ -101,6 +134,12 @@ class SchemaNew(HwSchema):
 
     def get(self):
         raise AttributeError("'SchemaNew' object has no attribute 'get'")
+
+    def get_string(self):
+        raise AttributeError("'SchemaNew' object has no attribute 'get_string'")
+
+    def get_dict(self):
+        raise AttributeError("'SchemaNew' object has no attribute 'get_dict'")
 
     def create(self):
         # verify valid Avro schema
@@ -130,6 +169,12 @@ class SchemaDropVersion(HwSchema):
 
     def put(self, *arg):
         raise AttributeError("'SchemaDrop' object has no attribute 'put'")
+
+    def get_string(self):
+        raise AttributeError("'SchemaDropVersion' object has no attribute 'get_string'")
+
+    def get_dict(self):
+        raise AttributeError("'SchemaDropVersion' object has no attribute 'get_dict'")
 
     def drop(self):
         response = requests.delete(self.api_url())
