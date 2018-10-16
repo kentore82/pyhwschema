@@ -28,6 +28,19 @@ Out[3]:
  u'timestamp': 1537358228278,
  u'version': 1}
 ```
+### Get metadata for schema with name test
+```
+In [5]: pyhwschema.SchemaMetaData(conn,"test").get_dict()
+Out[5]: 
+{u'compatibility': u'BACKWARD',
+ u'description': u'',
+ u'evolve': True,
+ u'name': u'test',
+ u'schemaGroup': u'test-group',
+ u'type': u'avro',
+ u'validationLevel': u'LATEST'}
+```
+
 ### Get latest version of schema with name test as string
 ```
 In [8]: pyhwschema.SchemaLatest(conn,"test").get_string()

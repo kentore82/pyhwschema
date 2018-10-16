@@ -183,3 +183,43 @@ class SchemaDropVersion(HwSchema):
         except:
             return {"responseCode": response.status_code, "responseMessage":
                 "Schema version {0} dropped from schema {1}".format(self.schema_id, self.schema_name)}
+
+
+class SchemaMetaData(HwSchema):
+
+    def __init__(self, connection, schema_name):
+        HwSchema.__init__(self, connection)
+        self.schema_name = schema_name
+
+    def api_url(self):
+        return self.connection + "/schemas/" + self.schema_name
+
+    def get_string(self):
+        """Returns a string representation of the schema metadata.
+
+        Gives back a meta string
+
+        Returns:
+            str: from GET request
+        """
+
+        response = requests.get(self.api_url())
+
+        return json.dumps(response.json()['schemaMetadata'])
+
+    def get_dict(self):
+        """Returns a dict representation of the schema metadata.
+
+        Gives back a schema dict
+
+        Returns:
+            dict: from GET request
+        """
+
+        response = requests.get(self.api_url())
+
+        return response.json()['schemaMetadata']
+
+    def put(self, *arg):
+        raise AttributeError("'SchemaLatest' object has no attribute 'put'")
+
