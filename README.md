@@ -9,7 +9,7 @@
 ```
 In [1]: import pyhwschema
 
-In [2]: conn = pyhwschema.Connect("kb1.ibm.dsb.no","9090").connect_url()
+In [2]: conn = pyhwschema.Connect("<schema_reg_host>","9090").connect_url()
 ```
 
 ### Get latest version of schema with name test
