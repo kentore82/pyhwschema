@@ -30,7 +30,9 @@ def avro_to_spark_schema(pyspark_session, avro_schema_string, spark_version='2.4
 
     java_avro_schema = pyspark_session._jvm.org.apache.avro.Schema.parse(avro_schema_string)
 
-    if (spark_version != '2.4.0') or (spark_version != u'2.4.0'):
+    spark_version_num = int(spark_version.replace('.', ''))
+
+    if spark_version_num < 240:
         pyspark_struct_type_json = pyspark_session._jvm.com.databricks.spark.avro.SchemaConverters\
             .toSqlType(java_avro_schema).dataType().json()
     else:
