@@ -1,7 +1,7 @@
 # Hortonworks Schema Registry Python API
 
 ## Install
-> `pip2.7 install git+https://github.com/kentore82/pyhwschema`
+> `pip install git+https://github.com/kentore82/pyhwschema`
 
 ## Usage
 
