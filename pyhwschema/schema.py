@@ -1,7 +1,12 @@
 from __future__ import print_function
-import requests
-from avro.schema import parse
+import sys
 import json
+import requests
+# Avro lib is different in between Python 2 and 3
+if sys.version_info[0] < 3:
+    from avro.schema import parse
+else:
+    from avro.schema import Parse as parse
 
 
 class HwSchema(object):
