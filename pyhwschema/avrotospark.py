@@ -42,3 +42,16 @@ def avro_to_spark_schema(pyspark_session, avro_schema_string, spark_version='2.4
     pyspark_struct_type = StructType.fromJson(json.loads(pyspark_struct_type_json))
 
     return pyspark_struct_type
+
+# spark schema to avro
+# from pyspark.sql.types import *
+#
+# pyspark_schema_create=StructType([StructField('Name', StringType(), True),
+#                                   StructField('DateTime', TimestampType(), True),
+#                                   StructField('Age', IntegerType(), True)])
+#
+# 
+# json_schema=pyspark_schema_create.json()
+# java_schema=spark._jvm.org.apache.spark.sql.types.DataType.fromJson(json_schema)
+# java_avro=spark._jvm.org.apache.spark.sql.avro.SchemaConverters.toAvroType(java_schema, True,"myrecord","mynamespace")
+# avro_schema = java_avro.toString()
