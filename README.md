@@ -12,7 +12,7 @@ In [1]: import pyhwschema
 In [2]: conn = pyhwschema.Connect("<schema_reg_host>","9090").connect_url()
 ```
 
-### Get latest version of schema with name test
+### Get latest version of schema from MASTER branch with name test
 ```
 In [3]: pyhwschema.SchemaLatest(conn,"test").get()
 Out[3]: 
