@@ -50,7 +50,7 @@ def avro_to_spark_schema(pyspark_session, avro_schema_string, spark_version='2.4
 #                                   StructField('DateTime', TimestampType(), True),
 #                                   StructField('Age', IntegerType(), True)])
 #
-# 
+#
 # json_schema=pyspark_schema_create.json()
 # java_schema=spark._jvm.org.apache.spark.sql.types.DataType.fromJson(json_schema)
 # java_avro=spark._jvm.org.apache.spark.sql.avro.SchemaConverters.toAvroType(java_schema, True,"myrecord","mynamespace")
