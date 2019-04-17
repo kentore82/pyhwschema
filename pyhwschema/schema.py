@@ -228,3 +228,50 @@ class SchemaMetaData(HwSchema):
     def put(self, *arg):
         raise AttributeError("'SchemaLatest' object has no attribute 'put'")
 
+
+class SchemaGetVersions(HwSchema):
+
+    def __init__(self, connection, schema_name):
+        HwSchema.__init__(self, connection)
+        self.schema_name = schema_name
+
+    def api_url(self):
+        return self.connection + "/schemas/" + self.schema_name + "/versions"
+
+    def get_string(self):
+        """Returns a string representation of the schema metadata.
+
+        Gives back a meta string
+
+        Returns:
+            str: from GET request
+        """
+
+        response = requests.get(self.api_url())
+
+        response_list = response.json()["entities"]
+
+        version_tuples = map(lambda x: {"version": x["version"], "id": x["id"]}, response_list)
+
+        return json.dumps(version_tuples)
+
+    def get_dict(self):
+        """Returns a dict representation of the schema metadata.
+
+        Gives back a schema dict
+
+        Returns.:
+            dict: from GET request
+        """
+
+        response = requests.get(self.api_url())
+
+        response_list = response.json()["entities"]
+
+        version_tuples = map(lambda x: {"version": x["version"], "id": x["id"]}, response_list)
+
+        return version_tuples
+
+    def put(self, *arg):
+        raise AttributeError("'SchemaLatest' object has no attribute 'put'")
+
