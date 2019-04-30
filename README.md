@@ -79,7 +79,8 @@ Out[6]:
 
 ### Create metadata for a new schema (new or existing group)
 ```
-In [11]: pyhwschema.SchemaNewMeta(conn, schema_name="test", schema_group="test", schema_meta_description="Used for testing",
+In [11]: pyhwschema.SchemaNewMeta(conn, schema_name="test", schema_group="test", 
+                                  schema_meta_description="Used for testing",
                                   schema_compatibility="NONE", schema_validationlevel="LATEST").create()
 Out[11]: 10
 ```
