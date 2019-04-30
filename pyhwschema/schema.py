@@ -97,11 +97,14 @@ class SchemaId(HwSchema):
 
 class SchemaNewMeta(HwSchema):
 
-    def __init__(self, connection, schema_name="test", schema_group="test", schema_meta_description="Used for testing"):
+    def __init__(self, connection, schema_name="test", schema_group="test", schema_meta_description="Used for testing",
+                 schema_compatibility="NONE", schema_validationlevel="LATEST"):
         HwSchema.__init__(self, connection)
         self.schema_name = schema_name
         self.schema_group = schema_group
         self.schema_meta_description = schema_meta_description
+        self.schema_compatibility = schema_compatibility
+        self.schema_validationlevel = schema_validationlevel
 
     def api_url(self):
         return self.connection + "/schemas"
@@ -120,8 +123,8 @@ class SchemaNewMeta(HwSchema):
                    "schemaGroup": self.schema_group,
                    "name": self.schema_name,
                    "description": self.schema_meta_description,
-                   "compatibility": "BACKWARD",
-                   "validationLevel": "LATEST"}
+                   "compatibility": self.schema_compatibility,
+                   "validationLevel": self.schema_validationlevel}
 
         return self.put(payload)
 
