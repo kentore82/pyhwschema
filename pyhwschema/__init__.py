@@ -6,5 +6,6 @@ from .schema import SchemaNew
 from .schema import SchemaNewMeta
 from .schema import SchemaMetaData
 from .schema import SchemaGetVersions
+from .schema import SchemaNewBranch
 
 from .connection import Connect

@@ -96,8 +96,15 @@ test_avro_schema='''{"type":"record",
                               ]
                      }'''
  
-In [14]: pyhwschema.SchemaNew(conn, schema_name="test",schema_text=test_avro_schema).create()
+In [14]: pyhwschema.SchemaNew(conn, schema_name="test",schema_text=test_avro_schema, 
+                              schema_branch="MASTER", schema_description="Used for testing").create()
 Out[14]: 2
+```
+
+### Create a new branch off a schema MASTER
+```
+pyhwschema.SchemaNewBranch(conn, schema_name="test", branch_name="test-branch", 
+                           schema_description="Used for dev").create()
 ```
 
 ### Drop/delete version of schema
@@ -109,4 +116,28 @@ Out[4]:
 
 In [5]: pyhwschema.SchemaDropVersion(conn, schema_name="test", schema_id="1").drop()
 Out[5]: {'responseMessage': 'Schema version 1 dropped from schema test', 'responseCode': 200}
+```
+
+### Get all versions for a schema
+```
+In[9]: pyhwschema.SchemaGetVersions(conn, schema_name="test4", branch="testfork").get()
+Out[9]: 
+{u'entities': [{u'description': u'dgf',
+   u'id': 108,
+   u'mergeInfo': None,
+   u'name': u'test4',
+   u'schemaMetadataId': 15,
+   u'schemaText': u'{...}',
+   u'stateId': 1,
+   u'timestamp': 1556878680184,
+   u'version': 2},
+  {u'description': u'test4',
+   u'id': 107,
+   u'mergeInfo': None,
+   u'name': u'test4',
+   u'schemaMetadataId': 15,
+   u'schemaText': u'{...}',
+   u'stateId': 5,
+   u'timestamp': 1556877928952,
+   u'version': 1}]}
 ```

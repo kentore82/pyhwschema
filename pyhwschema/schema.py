@@ -131,14 +131,16 @@ class SchemaNewMeta(HwSchema):
 
 class SchemaNew(HwSchema):
 
-    def __init__(self, connection, schema_text, schema_name="test", schema_description="Used for testing"):
+    def __init__(self, connection, schema_text, schema_name="test", schema_description="Used for testing",
+                 schema_branch="MASTER"):
         HwSchema.__init__(self, connection)
         self.schema_name = schema_name
         self.schema_text = schema_text
         self.schema_description = schema_description
+        self.schema_branch = schema_branch
 
     def api_url(self):
-        return self.connection + "/schemas/" + self.schema_name + "/versions"
+        return self.connection + "/schemas/" + self.schema_name + "/versions?branch=" + self.schema_branch
 
     def get(self):
         raise AttributeError("'SchemaNew' object has no attribute 'get'")
@@ -158,6 +160,37 @@ class SchemaNew(HwSchema):
 
         payload = {"description": self.schema_description,
                    "schemaText": self.schema_text}
+
+        return self.put(payload)
+
+
+class SchemaNewBranch(HwSchema):
+
+    def __init__(self, connection, schema_name="test", branch_name="test", schema_description="Used for testing"):
+        HwSchema.__init__(self, connection)
+        self.branch_name = branch_name
+        self.schema_name = schema_name
+        self.schema_description = schema_description
+
+        url = self.connection + "/schemas/" + self.schema_name + "/versions/latest?branch=MASTER"
+        response = requests.get(url)
+        self.version_id = response.json()
+
+    def api_url(self):
+        return self.connection + "/schemas/versionsById/" + str(self.version_id["id"]) + "/branch"
+
+    def get(self):
+        raise AttributeError("'SchemaNew' object has no attribute 'get'")
+
+    def get_string(self):
+        raise AttributeError("'SchemaNew' object has no attribute 'get_string'")
+
+    def get_dict(self):
+        raise AttributeError("'SchemaNew' object has no attribute 'get_dict'")
+
+    def create(self):
+        payload = {"description": self.schema_description,
+                   "name": self.branch_name}
 
         return self.put(payload)
 
@@ -234,12 +267,13 @@ class SchemaMetaData(HwSchema):
 
 class SchemaGetVersions(HwSchema):
 
-    def __init__(self, connection, schema_name):
+    def __init__(self, connection, schema_name, branch="MASTER"):
         HwSchema.__init__(self, connection)
         self.schema_name = schema_name
+        self.schema_branch = branch
 
     def api_url(self):
-        return self.connection + "/schemas/" + self.schema_name + "/versions"
+        return self.connection + "/schemas/" + self.schema_name + "/versions?branch=" + self.schema_branch
 
     def get_string(self):
         """Returns a string representation of the schema metadata.
