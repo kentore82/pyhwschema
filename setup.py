@@ -13,18 +13,11 @@ with open('LICENSE') as f:
 
 setup(
     name='pyhwschema',
-    version='0.0.1',
+    version='0.0.2',
     install_requires=requirements,
-    #extras_require={
-    #    ':python_version == "2.7"': [
-    #        'avro',
-    #    ],
-    #    ':python_version >= "3.0"': [
-    #        'avro-python3',
-    #    ],
-    #},
     description='Python API for Hortonworks Schema Registry',
-    long_description=readme,
+    long_description='Python API for Hortonworks Schema Registry',
+    long_description_content_type='text/markdown',
     author='Ken Tore Tallakstad',
     author_email='tallakstad@gmail.com',
     url='https://github.com/kentore82/pyhwschema',
