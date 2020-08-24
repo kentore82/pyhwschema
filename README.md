@@ -97,7 +97,8 @@ test_avro_schema='''{"type":"record",
                      }'''
  
 In [14]: pyhwschema.SchemaNew(conn, schema_name="test",schema_text=test_avro_schema, 
-                              schema_branch="MASTER", schema_description="Used for testing").create()
+                              schema_branch="MASTER", schema_description="Used for testing", 
+                              schema_enable=True).create()
 Out[14]: 2
 ```
 
@@ -140,4 +141,24 @@ Out[9]:
    u'stateId': 5,
    u'timestamp': 1556877928952,
    u'version': 1}]}
+```
+
+### Get the schema id for a schema
+```
+In[1]: pyhwschema.SchemaGetVersion(connection=conn, schema_name="TestSource_TestTable", schema_version=31).get_dict()
+Out[1]:
+{u'description': u'Used for testing', 
+ u'stateId': 5, 
+ u'schemaMetadataId': 65, 
+ u'version': 31, 
+ u'timestamp': 1598270595728, 
+ u'mergeInfo': None, 
+ u'id': 3125, 
+ u'name': u'TestSource_TestTable'}
+```
+
+### Set the schema state to "Enabled"
+```
+In[1]: pyhwschema.SchemaEnable(connection=conn, schema_id=1234).put()
+Out[1]: True
 ```
