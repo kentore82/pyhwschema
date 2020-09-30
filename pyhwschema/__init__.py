@@ -9,5 +9,6 @@ from .schema import SchemaGetVersions
 from .schema import SchemaGetVersion
 from .schema import SchemaNewBranch
 from .schema import SchemaEnable
+from .schema import SchemaDelete
 
 from .connection import Connect

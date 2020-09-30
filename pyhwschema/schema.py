@@ -1,12 +1,6 @@
-from __future__ import print_function
-import sys
 import json
 import requests
-# Avro lib is different in between Python 2 and 3
-if sys.version_info[0] < 3:
-    from avro.schema import parse
-else:
-    from avro.schema import Parse as parse
+from avro.schema import parse
 
 
 class HwSchema(object):
@@ -403,3 +397,27 @@ class SchemaEnable(HwSchema):
 
     def get_dict(self):
         raise AttributeError("'SchemaEnable' object has no attribute 'get_dict'")
+
+
+class SchemaDelete(HwSchema):
+    """Delete a schema and all related metadata"""
+
+    def __init__(self, connection, schema_name):
+        HwSchema.__init__(self, connection)
+        self.schema_name = schema_name
+
+    def api_url(self):
+        return self.connection + "/schemas/{0}".format(self.schema_name)
+
+    def put(self):
+        raise AttributeError("'SchemaDelete' object has no attribute 'put'")
+
+    def get_string(self):
+        raise AttributeError("'SchemaDelete' object has no attribute 'get_string'")
+
+    def get_dict(self):
+        raise AttributeError("'SchemaDelete' object has no attribute 'get_dict'")
+
+    def delete(self):
+        response = requests.delete(self.api_url())
+        return response.status_code
