@@ -297,7 +297,7 @@ class SchemaGetVersions(HwSchema):
 
         response_list = response.json()["entities"]
 
-        version_tuples = map(lambda x: {"version": x["version"], "id": x["id"]}, response_list)
+        version_tuples = list(map(lambda x: {"version": x["version"], "id": x["id"]}, response_list))
 
         return json.dumps(version_tuples)
 
@@ -314,7 +314,7 @@ class SchemaGetVersions(HwSchema):
 
         response_list = response.json()["entities"]
 
-        version_tuples = map(lambda x: {"version": x["version"], "id": x["id"]}, response_list)
+        version_tuples = list(map(lambda x: {"version": x["version"], "id": x["id"]}, response_list))
 
         return version_tuples
 
