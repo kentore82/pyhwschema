@@ -1,7 +1,7 @@
 # Hortonworks Schema Registry Python API
 
 ## Install
-> `pip2.7 install pyhwschema`
+> `pip3 install pyhwschema`
 
 ## Usage
 
